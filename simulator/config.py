@@ -1,6 +1,6 @@
 env_params = {
-'t_initial' :36000,
-'t_end' : 36100,
+'t_initial' :14400,
+'t_end' : 25200,
 'delta_t' : 5,  # s
 'vehicle_speed' : 22.788,   # km / h
 'repo_speed' : 1, #目前的设定需要与vehicl speed保持一致
@@ -26,22 +26,22 @@ env_params = {
 'track_recording_flag' : True,
 'driver_far_matching_cancel_prob_file' : 'driver_far_matching_cancel_prob',
 'input_file_path':'input/dataset.csv',
-'request_file_name' : 'input/order', #'toy_requests',
-'driver_file_name' : 'input/driver_info',
+'request_file_name' : './simulator/input_Hong_Kong/hongkong_date_based_order_test', #'toy_requests',
+'driver_file_name' : './siulator/input_Hong_Kong/hongkong_driver_info',
 'road_network_file_name' : 'road_network_information.pickle',
 'dispatch_method': 'LD', #LD: lagarange decomposition method designed by Peibo Duan
 # 'method': 'instant_reward_no_subway',
 'simulator_mode' : 'toy_mode',
 'experiment_mode' : 'train',
 'driver_num':500,
-'side':4,
+'side':10,
 'price_per_km':5,  # ￥ / km
 'road_information_mode':'load',
 'price_increasing_percentage': 0.2,
-'north_lat': 40.8845,
-'south_lat': 40.6968,
-'east_lng': -74.0831,
-'west_lng': -73.8414,
+'north_lat': 22.51,
+'south_lat': 19.57,
+'east_lng': 113.21,
+'west_lng': 114.32, # Hong Kong coordinates
 'rl_mode': 'reposition',  # reposition and matching
 'method': 'sarsa_no_subway',  #  'sarsa_no_subway' / 'pickup_distance' / 'instant_reward_no_subway'   #  rl for matching
 'reposition_method': 'A2C_global_aware',  # A2C, A2C_global_aware, random_cruise, stay  # rl for repositioning
@@ -100,7 +100,9 @@ PRE_STEP = 0
 # TRAIN_DATE_LIST = ['2015-07-06', '2015-07-07', '2015-07-08', '2015-07-09', '2015-07-10',
 #                    '2015-07-13', '2015-07-14', '2015-07-15', '2015-07-16', '2015-07-17'
 #                    ]
-TRAIN_DATE_LIST = [i for i in range(36000,36100)]
+# TRAIN_DATE_LIST = [i for i in range(36000,36100)]
+TRAIN_DATE_LIST = ['day2', 'day3', 'day4']
 
-TEST_DATE_LIST = ['2015-07-27', '2015-07-28', '2015-07-29', '2015-07-30', '2015-07-31']
+# TEST_DATE_LIST = ['2015-07-27', '2015-07-28', '2015-07-29', '2015-07-30', '2015-07-31']
+TEST_DATE_LIST = ['day5', 'day6']
 #  rl for matching

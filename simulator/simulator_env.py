@@ -175,7 +175,11 @@ class Simulator:
         trip_distance = self.requests['trip_distance'].values.tolist()
         reward_list = []
         for dis in trip_distance:
-            reward_list.append(2.5 + 0.5 * int(max(0,dis*1000-322)/322))
+            # reward_list.append(2.5 + 0.5 * int(max(0,dis*1000-322)/322))
+            # Changed to Hong Kong pricing rule
+            reward_list.append((27 + 1.9 * int(max(0, dis * 1000 - 2000) / 200))
+                                if dis > 7 else 
+                               (93.5 + 1.3 * (dis * 1000 - 7000) / 200))
         self.requests['designed_reward'] = reward_list
         self.requests['trip_time']  = self.requests['trip_distance'] / self.vehicle_speed * 3600
         self.requests['matching_time'] = 0
@@ -486,10 +490,24 @@ class Simulator:
                 wait_info['trip_time'] = wait_info['trip_distance'] / self.vehicle_speed * 3600
                 wait_info['wait_time'] = 0
                 # TJ
+                reward_list = []
                 if self.rl_mode == 'matching':
-                    wait_info['designed_reward'] = 2.5 + 0.5 * int(max(0,trip_distance*1000-322)/322)
+                    for dis in trip_distance:
+                        # reward_list.append(2.5 + 0.5 * int(max(0,dis*1000-322)/322))
+                        # Changed to Hong Kong pricing rule
+                        reward_list.append((27 + 1.9 * int(max(0, dis * 1000 - 2000) / 200))
+                                            if dis > 7 else 
+                                            (93.5 + 1.3 * (dis * 1000 - 7000) / 200))
+                    wait_info['designed_reward'] = reward_list
                 elif self.rl_mode == 'reposition':
-                    wait_info['designed_reward'] = 2.5 + 0.5 * int(max(0,trip_distance-322)/322)
+                    for dis in trip_distance:
+                        # reward_list.append(2.5 + 0.5 * int(max(0,dis*1000-322)/322))
+                        # Changed to Hong Kong pricing rule
+                        reward_list.append((27 + 1.9 * int(max(0, dis * 1000 - 2000) / 200))
+                                            if dis > 7 else 
+                                            (93.5 + 1.3 * (dis * 1000 - 7000) / 200))
+                    wait_info['designed_reward'] = reward_list
+                    # wait_info['designed_reward'] = 2.5 + 0.5 * int(max(0,trip_distance-322)/322)
                     wait_info['immediate_reward'] = 0
                 # TJ
                 wait_info['status'] = 0
@@ -659,7 +677,11 @@ class Simulator:
                 wait_info['itinerary_segment_dis_list'] = itinerary_segment_dis_list
                 reward_list = []
                 for dis in trip_distance:
-                    reward_list.append((2.5 + 0.5 * int(max(0,dis*1000-322)/322)*(1 + env_params['price_increasing_percentage'])))
+                    # Changed to Hong Kong pricing rule
+                    reward_list.append((27 + 1.9 * int(max(0, dis * 1000 - 2000) / 200)) * (1 + env_params['price_increasing_percentage'])
+                                        if dis > 7 else 
+                                        (93.5 + 1.3 * (dis * 1000 - 7000) / 200) * (1 + env_params['price_increasing_percentage']))
+                    # reward_list.append((2.5 + 0.5 * int(max(0,dis*1000-322)/322)*(1 + env_params['price_increasing_percentage'])))
                 #reward_list *= (1 + env_params['price_increasing_percentage'])
                 wait_info['designed_reward'] = reward_list 
                 if self.rl_mode == 'reposition':
