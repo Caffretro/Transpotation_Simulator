@@ -1,8 +1,8 @@
 import numpy as np
 from keras.models import Sequential, Model
 from keras.layers import Dense, Dropout, Input, Lambda, Reshape, concatenate, Conv2D, Flatten
-from keras.layers.merge import Add, Multiply
-from keras.optimizers import adam_v2
+from keras.layers import Add, Multiply
+from keras.optimizers import Adam
 from keras.losses import CategoricalCrossentropy, MeanSquaredError
 #import keras.backend as K
 #import tensorflow as tf
@@ -52,7 +52,7 @@ class A2C:
         actor.add(Dense(self.action_size, activation='softmax', kernel_initializer='he_uniform'))
         actor.summary()
         loss_fn = CategoricalCrossentropy()
-        actor.compile(loss=loss_fn, optimizer=adam_v2.Adam(learning_rate=self.actor_lr))
+        actor.compile(loss=loss_fn, optimizer=Adam(learning_rate=self.actor_lr))
         return actor
 
     def build_critic(self):
@@ -64,7 +64,7 @@ class A2C:
         critic.add(Dense(self.value_size, activation='linear',kernel_initializer='he_uniform'))
         critic.summary()
         loss_fn = MeanSquaredError()
-        critic.compile(loss=loss_fn, optimizer=adam_v2.Adam(learning_rate=self.critic_lr))
+        critic.compile(loss=loss_fn, optimizer=Adam(learning_rate=self.critic_lr))
         return critic
 
     def get_action(self, state, batch_size=1):

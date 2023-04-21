@@ -19,8 +19,9 @@ def format_hongkong_order_time():
 
 def check_formatted_data():
     data = pd.read_pickle("../input/hongkong_date_based_order.pickle")
-    for key in data['day4'].keys():
-        print(key, ':', data['day4'][key])
+    # for key in data['day4'].keys():
+    #     print(key, ':', data['day4'][key])
+    print(data['day2'][85163+86400])
         
 if __name__ == '__main__':
     # format_hongkong_order_time()

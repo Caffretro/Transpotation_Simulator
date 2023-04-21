@@ -26,8 +26,8 @@ env_params = {
 'track_recording_flag' : True,
 'driver_far_matching_cancel_prob_file' : 'driver_far_matching_cancel_prob',
 'input_file_path':'input/dataset.csv',
-'request_file_name' : './simulator/input_Hong_Kong/hongkong_date_based_order_test', #'toy_requests',
-'driver_file_name' : './siulator/input_Hong_Kong/hongkong_driver_info',
+'request_file_name' : 'input/hongkong_date_based_order', #'toy_requests',
+'driver_file_name' : 'input/hongkong_driver_info',
 'road_network_file_name' : 'road_network_information.pickle',
 'dispatch_method': 'LD', #LD: lagarange decomposition method designed by Peibo Duan
 # 'method': 'instant_reward_no_subway',
@@ -42,10 +42,10 @@ env_params = {
 'south_lat': 19.57,
 'east_lng': 113.21,
 'west_lng': 114.32, # Hong Kong coordinates
-'rl_mode': 'reposition',  # reposition and matching
+'rl_mode': 'matching',  # reposition and matching
 'method': 'sarsa_no_subway',  #  'sarsa_no_subway' / 'pickup_distance' / 'instant_reward_no_subway'   #  rl for matching
 'reposition_method': 'A2C_global_aware',  # A2C, A2C_global_aware, random_cruise, stay  # rl for repositioning
-'dayparting': True, # if true, simulator_env will compute information based on time periods in a day, e.g. 'morning', 'afternoon'
+'dayparting': False, # if true, simulator_env will compute information based on time periods in a day, e.g. 'morning', 'afternoon'
 }
 wait_time_params_dict = {'morning': [2.582, 2.491, 0.026, 1.808, 2.581],
                     'evening': [4.862, 2.485, 0, 1.379, 13.456],
@@ -78,8 +78,8 @@ sarsa_params = dict(learning_rate=0.005, discount_rate=0.95)  # parameters in sa
 
 # rl for repositioning
 # hyperparameters for rl
-NUM_EPOCH = 1301
-STOP_EPOCH = 1300
+NUM_EPOCH = 2500
+STOP_EPOCH = 2000
 DISCOUNT_FACTOR = 0.95
 ACTOR_LR = 0.001
 CRITIC_LR = 0.005

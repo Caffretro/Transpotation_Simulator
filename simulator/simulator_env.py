@@ -166,12 +166,14 @@ class Simulator:
                 pass
         column_name = ['order_id', 'origin_id', 'origin_lat', 'origin_lng', 'dest_id', 'dest_lat', 'dest_lng',
                        'trip_distance', 'start_time', 'origin_grid_id', 'dest_grid_id', 'itinerary_node_list',
-                       'itinerary_segment_dis_list', 'trip_time', 'designed_reward', 'cancel_prob']
+                       'itinerary_segment_dis_list', 'trip_time', 'designed_reward', 'cancel_prob', 'extra']
         self.end_of_episode = 0  # rl for matching
         if self.rl_mode == 'matching':
             self.dispatch_transitions_buffer = [np.array([]).reshape([0, 2]), np.array([]), np.array([]).reshape([0, 2]),
                                             np.array([]).astype(float)]  # rl for matching
         self.requests = pd.DataFrame(request_list,columns=column_name)
+        self.requests.drop(columns=['extra']) # TODO: figure out a better way to drop
+
         trip_distance = self.requests['trip_distance'].values.tolist()
         reward_list = []
         for dis in trip_distance:
@@ -642,9 +644,10 @@ class Simulator:
                         # rl for matching
             # Code end
 
+            # We have extra but we want to drop it
             column_name = ['order_id', 'origin_id', 'origin_lat', 'origin_lng', 'dest_id', 'dest_lat', 'dest_lng',
                 'trip_distance', 'start_time', 'origin_grid_id', 'dest_grid_id', 'itinerary_node_list',
-                'itinerary_segment_dis_list', 'trip_time', 'designed_reward', 'cancel_prob']
+                'itinerary_segment_dis_list', 'trip_time', 'designed_reward', 'cancel_prob', 'extra']
             if len(sampled_requests) > 0:
                 itinerary_segment_dis_list = []
                 itinerary_node_list = np.array(sampled_requests)[:, 11]
@@ -670,6 +673,7 @@ class Simulator:
                         print(itinerary_node)
 
                 wait_info = pd.DataFrame(sampled_requests, columns=column_name)
+                wait_info.drop(columns=['extra'], inplace=True) # TODO: figure out a better way to drop
                 wait_info['itinerary_node_list'] = itinerary_node_list
                 wait_info['start_time'] = self.time
                 wait_info['trip_distance'] = trip_distance
