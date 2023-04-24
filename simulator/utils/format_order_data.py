@@ -23,6 +23,23 @@ def check_formatted_data():
     #     print(key, ':', data['day4'][key])
     print(data['day2'][85163+86400])
         
+def check_driver_data():
+    data = pd.read_pickle('../input/hongkong_driver_info.pickle')
+    # minimum = 100000000
+    # for driver in data['end_time']:
+    #     if driver < minimum:
+    #         minimum = driver
+    # print(minimum)
+    print(data)
+
+def shift_driver_working_time():
+    data = pickle.load('../input/hongkong_driver_info.pickle', 'rb')
+    data['start_time'] -= 28800
+    data['end_time'] -= 28800
+    test_save_data = pickle.dump(data, open("../input/hongkong_driver_info_time_forwarded.pickle", 'wb'))
+
 if __name__ == '__main__':
     # format_hongkong_order_time()
-    check_formatted_data()
+    # check_formatted_data()
+    check_driver_data()
+    # shift_driver_working_time()

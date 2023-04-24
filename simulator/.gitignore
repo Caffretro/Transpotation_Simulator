@@ -11,3 +11,7 @@ cache/
 .ipynb_checkpoints/
 .DS_Store
 training_results_record_A2C_global_aware.pickle
+
+utils/*.txt
+*.pickle
+training_results_record
