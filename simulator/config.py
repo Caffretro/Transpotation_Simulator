@@ -43,9 +43,9 @@ env_params = {
 'east_lng': 113.21,
 'west_lng': 114.32, # Hong Kong coordinates
 'rl_mode': 'matching',  # reposition and matching
-'method': 'sarsa_no_subway',  #  'sarsa_no_subway' / 'pickup_distance' / 'instant_reward_no_subway'   #  rl for matching
+'method': 'instant_reward_no_subway',  #  'sarsa_no_subway' / 'pickup_distance' / 'instant_reward_no_subway'   #  rl for matching
 'reposition_method': 'A2C_global_aware',  # A2C, A2C_global_aware, random_cruise, stay  # rl for repositioning
-'dayparting': False, # if true, simulator_env will compute information based on time periods in a day, e.g. 'morning', 'afternoon'
+'dayparting': True, # if true, simulator_env will compute information based on time periods in a day, e.g. 'morning', 'afternoon'
 }
 wait_time_params_dict = {'morning': [2.582, 2.491, 0.026, 1.808, 2.581],
                     'evening': [4.862, 2.485, 0, 1.379, 13.456],
@@ -68,7 +68,7 @@ price_params_dict = {'short': [1.245,0.599,10.629,10.305,0.451],
 #                     'other': [0,2.053,0.857,4.666,1.961]}
 #  rl for matching
 # global variable and parameters for sarsa
-START_TIMESTAMP = 36000  # the start timestamp
+START_TIMESTAMP = 25200  # the start timestamp
 LEN_TIME_SLICE = 5  # the length of a time slice, 5 minute (300 seconds) in this experiment
 LEN_TIME = 100 # 3 hours
 # NUM_EPOCH = 4001  # 4001 / 3001
