@@ -741,6 +741,12 @@ def driver_online_offline_decision(driver_table, current_time):
     new_driver_table = driver_table
     new_driver_table.loc[new_driver_table.isin(online_driver_table.to_dict('list')).all(axis=1), 'status'] = 0
     new_driver_table.loc[new_driver_table.isin(offline_driver_table.to_dict('list')).all(axis=1), 'status'] = 3
+    counter = 0
+    for driver in new_driver_table['status']:
+        if driver == 1 or driver == 2:
+            counter += 1
+    if counter != 0:
+        print(counter)
     # return new_driver_table
     return new_driver_table
 
