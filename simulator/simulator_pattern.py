@@ -32,5 +32,8 @@ class SimulatorPattern(object):
             self.request_all = pickle.load(open(data_path + self.request_file_name + '.pickle', 'rb'))
             # print(self.request_all)
             self.driver_info = pickle.load(open(load_path + self.driver_file_name + '.pickle', 'rb')).head(env_params['driver_num'])
+            # drivers are grouped by driver_id, sample drivers to keep all their corresponding rows
+            drivers_to_keep = random.sample(list(self.driver_info.unique()), env_params['driver_num'])
+            self.driver_info = self.driver_info[self.driver_info['driver_id'].isin(drivers_to_keep)]
             # self.driver_info = self.driver_info.sample(n=env_params['driver_num'])
             # print(self.driver_info)

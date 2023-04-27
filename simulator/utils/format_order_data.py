@@ -18,19 +18,22 @@ def format_hongkong_order_time():
     test_save_data = pickle.dump(new_dict, open("../input/hongkong_date_based_order.pickle", 'wb'))
 
 def check_formatted_data():
-    data = pd.read_pickle("../input/hongkong_date_based_order.pickle")
+    data = pd.read_pickle("../input/April 25/hongkong_processed_order_April25.pickle")
+    with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     # for key in data['day4'].keys():
     #     print(key, ':', data['day4'][key])
-    print(data['day2'][85163+86400])
+        for key in sorted(data.keys()):
+            print(data[key])
         
 def check_driver_data():
-    data = pd.read_pickle('../input/hongkong_driver_info.pickle')
+    data = pd.read_pickle('../input/April 25/hongkong_driver_info_April25.pickle')
+    with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     # minimum = 100000000
     # for driver in data['end_time']:
     #     if driver < minimum:
     #         minimum = driver
     # print(minimum)
-    print(data)
+        print(data)
 
 def shift_driver_working_time():
     data = pickle.load('../input/hongkong_driver_info.pickle', 'rb')
@@ -38,8 +41,15 @@ def shift_driver_working_time():
     data['end_time'] -= 28800
     test_save_data = pickle.dump(data, open("../input/hongkong_driver_info_time_forwarded.pickle", 'wb'))
 
+def sample_drivers(sample_num):
+    data = pd.read_pickle('../input/April 25/hongkong_driver_info_April25_122348.pickle')
+    with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+        driver_num = pd.unique(data['driver_id'])
+        print(driver_num)
+
 if __name__ == '__main__':
     # format_hongkong_order_time()
     # check_formatted_data()
-    check_driver_data()
+    # check_driver_data()
     # shift_driver_working_time()
+    sample_drivers(3000)

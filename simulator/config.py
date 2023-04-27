@@ -33,7 +33,7 @@ env_params = {
 # 'method': 'instant_reward_no_subway',
 'simulator_mode' : 'toy_mode',
 'experiment_mode' : 'train',
-'driver_num':500,
+'driver_num':3000,
 'side':10,
 'price_per_km':5,  # ￥ / km
 'road_information_mode':'load',

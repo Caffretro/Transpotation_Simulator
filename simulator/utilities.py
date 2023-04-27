@@ -734,20 +734,14 @@ def driver_online_offline_decision(driver_table, current_time):
     # Notice that we should not change the state of delievery and pickup drivers, since they are occopied. 
     online_driver_table = driver_table.loc[(driver_table['start_time'] <= current_time) & (driver_table['end_time'] > current_time)]
     offline_driver_table = driver_table.loc[(driver_table['start_time'] > current_time) | (driver_table['end_time'] <= current_time)]
-    
-    online_driver_table = online_driver_table.loc[(online_driver_table['status'] != 1) | (online_driver_table['status'] != 2)]
-    offline_driver_table = offline_driver_table.loc[(offline_driver_table['status'] != 1) | (offline_driver_table['status'] != 2)]
+    print(pd.unique(online_driver_table['status']))
+    print(pd.unique(offline_driver_table['status']))
+    online_driver_table = online_driver_table.loc[(online_driver_table['status'] != 1) & (online_driver_table['status'] != 2)]
+    offline_driver_table = offline_driver_table.loc[(offline_driver_table['status'] != 1) & (offline_driver_table['status'] != 2)]
     # print(f'online count: {len(online_driver_table)}, offline count: {len(offline_driver_table)}, total count: {len(driver_table)}')
     new_driver_table = driver_table
     new_driver_table.loc[new_driver_table.isin(online_driver_table.to_dict('list')).all(axis=1), 'status'] = 0
     new_driver_table.loc[new_driver_table.isin(offline_driver_table.to_dict('list')).all(axis=1), 'status'] = 3
-    counter = 0
-    for driver in new_driver_table['status']:
-        if driver == 1 or driver == 2:
-            counter += 1
-    if counter != 0:
-        print(counter)
-    # return new_driver_table
     return new_driver_table
 
 
