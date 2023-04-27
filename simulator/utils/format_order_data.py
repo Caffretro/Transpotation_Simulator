@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
 import pandas as pd
+import random
 
 def format_hongkong_order_time():
     DATE_LIST = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8']
@@ -45,7 +46,9 @@ def sample_drivers(sample_num):
     data = pd.read_pickle('../input/April 25/hongkong_driver_info_April25_122348.pickle')
     with pd.option_context('display.max_rows', None, 'display.max_columns', None):
         driver_num = pd.unique(data['driver_id'])
-        print(driver_num)
+        drivers_to_keep = random.sample(list(driver_num), sample_num)
+    
+        print(drivers_to_keep)
 
 if __name__ == '__main__':
     # format_hongkong_order_time()
