@@ -19,12 +19,13 @@ def format_hongkong_order_time():
     test_save_data = pickle.dump(new_dict, open("../input/hongkong_date_based_order.pickle", 'wb'))
 
 def check_formatted_data():
-    data = pd.read_pickle("../input/April 25/hongkong_processed_order_April25.pickle")
+    data = pd.read_pickle("../input/April 25/hongkong_processed_order_April25_63902.pickle")
     with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     # for key in data['day4'].keys():
     #     print(key, ':', data['day4'][key])
-        for key in sorted(data.keys()):
-            print(data[key])
+        # for key in sorted(data.keys()):
+        #     print(data[key])
+        print(data[80000])
         
 def check_driver_data():
     data = pd.read_pickle('../input/April 25/hongkong_driver_info_April25.pickle')
@@ -52,7 +53,7 @@ def sample_drivers(sample_num):
 
 if __name__ == '__main__':
     # format_hongkong_order_time()
-    # check_formatted_data()
+    check_formatted_data()
     # check_driver_data()
     # shift_driver_working_time()
-    sample_drivers(3000)
+    # sample_drivers(3000)

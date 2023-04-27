@@ -176,6 +176,11 @@ class Simulator:
                                             np.array([]).astype(float)]  # rl for matching
         self.requests = pd.DataFrame(request_list,columns=column_name)
         self.requests.drop(columns=['extra']) # TODO: figure out a better way to drop
+        if self.experiment_mode == 'train':
+            self.requests = self.requests.sample(frac=0.5, random_state=42)
+        else:
+            train_set = self.requests.sample(frac=0.5, random_state=42)
+            self.requests = self.requests.drop(train_set.index)
 
         trip_distance = self.requests['trip_distance'].values.tolist()
         reward_list = []
