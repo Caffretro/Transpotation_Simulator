@@ -48,7 +48,7 @@ class Simulator:
         self.request_file_name = kwargs['request_file_name']
         self.driver_file_name = kwargs['driver_file_name']
         pattern_params = {'simulator_mode': self.simulator_mode, 'request_file_name': self.request_file_name,
-                          'driver_file_name': self.driver_file_name}
+                          'driver_file_name': self.driver_file_name, 'experiment_mode': self.experiment_mode}
         pattern = SimulatorPattern(**pattern_params)
 
         # self.method = kwargs.pop('method', 'no_subway')  # rl for matching
