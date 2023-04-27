@@ -151,10 +151,13 @@ class Simulator:
 
         # construct order tabledd
         # TJ
-        if self.experiment_date in self.request_all.keys():
-            self.request_databases = deepcopy(self.request_all[self.experiment_date])  # 这里取出来之后是个list
-        else:
-            self.request_databases = []
+        # if self.experiment_date in self.request_all.keys():
+        #     self.request_databases = deepcopy(self.request_all[self.experiment_date])  # 这里取出来之后是个list
+        # else:
+        #     self.request_databases = []
+
+        # hongkong updated data is within one day, so we should initialize table like this
+        self.request_databases = deepcopy(self.request_all)
         # TJ
 
         request_list = []
@@ -747,6 +750,7 @@ class Simulator:
                     wait_info['maximum_pickup_time_passenger_can_tolerate'] = skewed_normal_distribution(pick_params[0],pick_params[1],pick_params[2],pick_params[3],pick_params[4],len(wait_info)) * 60
                 else:
                     wait_info['maximum_wait_time'] = self.maximum_wait_time_mean
+                    wait_info['maximum_pickup_time_passenger_can_tolerate'] = float(sys.maxsize)
                     # TODO: ask for maximum_pickup_time_passenger_can_tolerate
                 wait_info['weight'] = weight_array # rl for matching
                 # add extra info of orders

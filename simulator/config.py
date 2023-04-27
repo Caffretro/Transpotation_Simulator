@@ -15,7 +15,7 @@ env_params = {
 "maximum_price_passenger_can_tolerate_std":0,  # ￥
 'maximal_pickup_distance' : 1,  # km
 'request_interval': 5,  #
-'cruise_flag' :False,
+'cruise_flag' :True,
 'delivery_mode':'rg',
 'pickup_mode':'rg',
 'max_idle_time' : 1,
@@ -26,8 +26,8 @@ env_params = {
 'track_recording_flag' : True,
 'driver_far_matching_cancel_prob_file' : 'driver_far_matching_cancel_prob',
 'input_file_path':'input/dataset.csv',
-'request_file_name' : 'input/hongkong_date_based_order', #'toy_requests',
-'driver_file_name' : 'input/hongkong_driver_info',
+'request_file_name' : 'input/hongkong_processed_order_April25_63902', #'toy_requests',
+'driver_file_name' : 'input/hongkong_driver_info_April25_122348',
 'road_network_file_name' : 'road_network_information.pickle',
 'dispatch_method': 'LD', #LD: lagarange decomposition method designed by Peibo Duan
 # 'method': 'instant_reward_no_subway',
@@ -45,7 +45,7 @@ env_params = {
 'rl_mode': 'matching',  # reposition and matching
 'method': 'instant_reward_no_subway',  #  'sarsa_no_subway' / 'pickup_distance' / 'instant_reward_no_subway'   #  rl for matching
 'reposition_method': 'A2C_global_aware',  # A2C, A2C_global_aware, random_cruise, stay  # rl for repositioning
-'dayparting': True, # if true, simulator_env will compute information based on time periods in a day, e.g. 'morning', 'afternoon'
+'dayparting': False, # if true, simulator_env will compute information based on time periods in a day, e.g. 'morning', 'afternoon'
 }
 wait_time_params_dict = {'morning': [2.582, 2.491, 0.026, 1.808, 2.581],
                     'evening': [4.862, 2.485, 0, 1.379, 13.456],

@@ -45,10 +45,10 @@ interval = 2 * radius / side
 """
 Here, we build the connection to mongodb, which will be used to speed up access to road network information.
 """
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient("mongodb://localhost:27018/")
 mydb = myclient["route_network"]
    
-mycollect = mydb['route_list']
+mycollect = mydb['hongkong_route_info']
 
 # define the function to get zone_id of segment node
 def get_zone(lat, lng):
@@ -734,8 +734,6 @@ def driver_online_offline_decision(driver_table, current_time):
     # Notice that we should not change the state of delievery and pickup drivers, since they are occopied. 
     online_driver_table = driver_table.loc[(driver_table['start_time'] <= current_time) & (driver_table['end_time'] > current_time)]
     offline_driver_table = driver_table.loc[(driver_table['start_time'] > current_time) | (driver_table['end_time'] <= current_time)]
-    print(pd.unique(online_driver_table['status']))
-    print(pd.unique(offline_driver_table['status']))
     online_driver_table = online_driver_table.loc[(online_driver_table['status'] != 1) & (online_driver_table['status'] != 2)]
     offline_driver_table = offline_driver_table.loc[(offline_driver_table['status'] != 1) & (offline_driver_table['status'] != 2)]
     # print(f'online count: {len(online_driver_table)}, offline count: {len(offline_driver_table)}, total count: {len(driver_table)}')
